@@ -37,6 +37,7 @@
                 end: '=?',
                 contentZIndex: '=?',
                 allowClickEvents: '=?',
+                allowMobile: '=?',
                 mobileImage: '=?',
                 playerCallback: '&?'
             },
@@ -62,6 +63,7 @@
                 scope.ratio = scope.ratio || 16/9;
                 scope.loop = scope.loop === undefined ? true : scope.loop;
                 scope.mute = scope.mute === undefined ? true : scope.mute;
+                scope.allowMobile = scope.allowMobile === undefined ? false : scope.allowMobile;
 
                 if (!scope.videoId && !scope.playlist) {
                     throw new Error('Either video-id or playlist must be defined.');
@@ -461,7 +463,7 @@
                 /**
                  * if it's not mobile or tablet then initialize video
                  */
-                if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || scope.allowMobile === true) {
 
                     /**
                      * Check to see if YouTube IFrame script is ready, if it is, resolve ytd defer, if not, wait for
